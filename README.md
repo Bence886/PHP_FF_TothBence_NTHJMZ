@@ -8,8 +8,8 @@ Tables:
  * **type** (*type_id*, age, level, name, branching_type, min_branch_num, max_branch_num, growth_len, growth_width, branching_roll, branching_angle, file_name)
  * **environment** (*environment_id*, environment_name, soil_quality, altitude, wind_direction, wind_strength, rainfall, environment_file_name)
  
-Az alkalmazás routeja *tree/*  
-Az osztályok route-ja a tábla neve.
+The route of the site is *tree/*  
+The routes of the classes are the name of the tables.
 
 List of actions (*CRUD*):  
  Create:
