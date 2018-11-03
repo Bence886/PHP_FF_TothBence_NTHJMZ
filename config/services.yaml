@@ -29,3 +29,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    app.crudfactory:
+        class: App\Service\CrudFactory
+        arguments: [ "@doctrine.orm.entity_manager", "@form.factory", "@request_stack"]
+    app.trees:
+        class: App\Service\ITreeCrudService
+        public: true
+        factory: [ "@app.crudfactory", getTreeService ]
+    app.treetypes:
+        class: App\Service\ITreeTypeCrudService
+        public: true
+        factory: [ "@app.crudfactory", getTreeTypeService ]
+    app.environments:
+        class: App\Service\IEnvironmentCrudService
+        public: true
+        factory: [ "@app.crudfactory", getEnvironmentService ]
+# \xampp\php\php bin/console debug:container app
