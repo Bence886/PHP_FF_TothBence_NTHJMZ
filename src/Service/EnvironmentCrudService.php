@@ -4,6 +4,11 @@ namespace App\Service;
 
 use App\Entity\Environment;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -76,7 +81,18 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function getEnvironmentForm($oneEnvironment)
     {
-        // TODO: Implement getEnvironmentForm() method.
+        $form = $this->formFactory->createBuilder(FormType::class, $oneEnvironment);
+
+        $form->add("environment_name", TextType::class, ["required"=>false]);
+        $form->add("environment_file_name", TextType::class, ["required"=>false]);
+        $form->add("environment_altitude", NumberType::class, ["required"=>false]);
+        $form->add("environment_rainfall", NumberType::class, ["required"=>false]);
+        $form->add("environment_soil_quality", NumberType::class, ["required"=>false]);
+        $form->add("environment_wind_direction", TextType::class, ["required"=>false]);
+        $form->add("environment_wind_strength", NumberType::class, ["required"=>false]);
+
+        $form->add("SAVE", SubmitType::class);
+        return $form->getForm();
     }
 
 }

@@ -4,6 +4,10 @@ namespace App\Service;
 
 use App\Entity\TreeType;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +72,7 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
     public function removeTreeType($treeTypeId)
     {
         $oneTT = $this->getTreeTypeById($treeTypeId);
-        $this->em->remove(oneTT);
+        $this->em->remove($oneTT);
         $this->em->flush();
     }
 
@@ -77,7 +81,22 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function getForm($oneTreeType)
     {
-        // TODO: Implement getForm() method.
+        $form = $this->formFactory->createBuilder(FormType::class, $oneTreeType);
+
+        $form->add("tree_type_name", TextType::class, ["required"=>false]);
+        $form->add("tree_type_file_name", TextType::class, ["required"=>false]);
+        $form->add("tree_type_branching_type", TextType::class, ["required"=>false]);
+        $form->add("tree_type_age", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_level", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_branching_angle", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_branching_roll", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_growth_len", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_growth_width", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_max_branching_num", NumberType::class, ["required"=>false]);
+        $form->add("tree_type_min_branching_num", NumberType::class, ["required"=>false]);
+
+        $form->add("SAVE", SubmitType::class);
+        return $form->getForm();
     }
 
 }
