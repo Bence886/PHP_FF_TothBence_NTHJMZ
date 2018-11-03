@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TreeCrudService extends CrudService implements ITreeCrudService
 {
@@ -17,7 +18,7 @@ class TreeCrudService extends CrudService implements ITreeCrudService
 
     public function getRepo()
     {
-        // TODO: Implement getRepo() method.
+        return $this->em->getRepository(Tree::class);
     }
 
     /**
@@ -25,7 +26,7 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function getAllTrees()
     {
-        // TODO: Implement getAllTrees() method.
+        return $this->getRepo()->findAll();
     }
 
     /**
@@ -33,7 +34,12 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function getTreeById($treeId)
     {
-        // TODO: Implement getTreeById() method.
+        $oneTree = $this->getRepo()->find($treeId);
+        if ($oneTree == null)
+        {
+            throw new NotFoundHttpException("NO TREE");
+        }
+        return $oneTree;
     }
 
     /**
@@ -41,7 +47,7 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function getTreesByName($name)
     {
-        // TODO: Implement getTreesByName() method.
+        return $this->getRepo()->findBy(["tree_name"=>$name]);
     }
 
     /**
@@ -49,7 +55,7 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function getTreesByTreeType($tree_type_id)
     {
-        // TODO: Implement getTreesByTreeType() method.
+        return $this->getRepo()->findBy(["tree_environment"=>$tree_type_id]);
     }
 
     /**
@@ -57,7 +63,7 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function getTreeByEnvironment($environment_id)
     {
-        // TODO: Implement getTreeByEnvironment() method.
+        return $this->getRepo()->findBy(["tree_tree_type"=>$environment_id]);
     }
 
     /**
@@ -65,7 +71,8 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function saveTree($oneTree)
     {
-        // TODO: Implement saveTree() method.
+        $this->em->persist($oneTree);
+        $this->em->flush();
     }
 
     /**
@@ -73,7 +80,9 @@ class TreeCrudService extends CrudService implements ITreeCrudService
      */
     public function removeTree($treeId)
     {
-        // TODO: Implement removeTree() method.
+        $oneTree = $this->getTreeById($treeId);
+        $this->em->remove($oneTree);
+        $this->em->flush();
     }
 
     /**

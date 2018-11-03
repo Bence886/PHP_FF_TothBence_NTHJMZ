@@ -7,20 +7,21 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
 {
-    /**
-     * @inheritDoc
-     */
     public function __construct(EntityManager $em, FormFactory $formFactory, Request $request)
     {
         parent::__construct($em, $formFactory, $request);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRepo()
     {
-        // TODO: Implement getRepo() method.
+        return $this->em->getRepository(TreeType::class);
     }
 
     /**
@@ -28,7 +29,7 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function getAllTreeTypes()
     {
-        // TODO: Implement getAllTreeTypes() method.
+        return $this->getRepo()->findAll();
     }
 
     /**
@@ -36,7 +37,7 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function getTreeTypeByName($name)
     {
-        // TODO: Implement getTreeTypeByName() method.
+        $this->getRepo()->findBy(["tree_type_name"=>$name]);
     }
 
     /**
@@ -44,7 +45,12 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function getTreeTypeById($treeTypeId)
     {
-        // TODO: Implement getTreeTypeById() method.
+        $oneTT = $this->getRepo()->find($treeTypeId);
+        if ($oneTT==null)
+        {
+            throw new NotFoundHttpException("NO TREETYPE");
+        }
+        return $oneTT;
     }
 
     /**
@@ -52,7 +58,8 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function saveTreeType($oneTreeType)
     {
-        // TODO: Implement saveTreeType() method.
+        $this->em->persist($oneTreeType);
+        $this->em->flush();
     }
 
     /**
@@ -60,7 +67,9 @@ class TreeTypeCrudService extends CrudService implements ITreeTypeCrudService
      */
     public function removeTreeType($treeTypeId)
     {
-        // TODO: Implement removeTreeType() method.
+        $oneTT = $this->getTreeTypeById($treeTypeId);
+        $this->em->remove(oneTT);
+        $this->em->flush();
     }
 
     /**

@@ -6,20 +6,21 @@ use App\Entity\Environment;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class EnvironmentCrudService extends CrudService implements IEnvironmentCrudService
 {
-    /**
-     * @inheritDoc
-     */
     public function __construct(EntityManager $em, FormFactory $formFactory, Request $request)
     {
         parent::__construct($em, $formFactory, $request);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getRepo()
     {
-        // TODO: Implement getRepo() method.
+        return $this->em->getRepository(Environment::class);
     }
 
     /**
@@ -27,7 +28,7 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function getAllEnvironments()
     {
-        // TODO: Implement getAllEnvironments() method.
+        return $this->getRepo()->findAll();
     }
 
     /**
@@ -35,7 +36,12 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function getEnvironmentById($environmentId)
     {
-        // TODO: Implement getEnvironmentById() method.
+        $oneEnv = $this->getRepo()->find($environmentId);
+        if ($oneEnv == null)
+        {
+            throw new NotFoundHttpException("NO ENVIRONMENT");
+        }
+        return $oneEnv;
     }
 
     /**
@@ -43,7 +49,7 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function getEnvironmentByName($name)
     {
-        // TODO: Implement getEnvironmentByName() method.
+        return $this->getRepo()->findBy(["environment_name"=>$name]);
     }
 
     /**
@@ -51,7 +57,8 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function saveEnvironment($oneEnvironment)
     {
-        // TODO: Implement saveEnvironment() method.
+        $this->em->persist($oneEnvironment);
+        $this->em->flush();
     }
 
     /**
@@ -59,7 +66,9 @@ class EnvironmentCrudService extends CrudService implements IEnvironmentCrudServ
      */
     public function removeEnvironment($environmentId)
     {
-        // TODO: Implement removeEnvironment() method.
+        $oneEnv = $this->getEnvironmentById($environmentId);
+        $this->em->remove($oneEnv);
+        $this->em->flush();
     }
 
     /**
