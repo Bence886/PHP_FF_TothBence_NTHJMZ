@@ -4,6 +4,7 @@ namespace App\Service;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CrudFactory
 {
@@ -26,14 +27,27 @@ class CrudFactory
      * CrudFactory constructor.
      * @param EntityManager $em
      * @param FormFactory $formFactory
-     * @param Request $request
+     * @param RequestStack $request
      */
-    public function __construct(EntityManager $em, FormFactory $formFactory, Request $request)
+    public function __construct(EntityManager $em, FormFactory $formFactory, RequestStack $request)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->request = $request;
+        $this->request = $request->getCurrentRequest();
     }
 
+    public function getTreeService() : ITreeCrudService
+    {
+        return new TreeCrudService($this->em, $this->formFactory, $this->request);
+    }
 
+    public function getTreeTypeService() : ITreeTypeCrudService
+    {
+        return new TreeTypeCrudService($this->em, $this->formFactory, $this->request);
+    }
+
+    public function getEnvironmentService() : IEnvironmentCrudService
+    {
+        return new EnvironmentCrudService($this->em, $this->formFactory, $this->request);
+    }
 }
