@@ -49,7 +49,7 @@ class TreeType
      * @var integer
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $tree_type_nim_branching_num;
+    private $tree_type_min_branching_num;
 
     /**
      * @var integer
@@ -178,17 +178,17 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeNimBranchingNum(): int
+    public function getTreeTypeMinBranchingNum(): int
     {
-        return $this->tree_type_nim_branching_num;
+        return $this->tree_type_min_branching_num;
     }
 
     /**
-     * @param int $tree_type_nim_branching_num
+     * @param int $tree_type_min_branching_num
      */
-    public function setTreeTypeNimBranchingNum(int $tree_type_nim_branching_num): void
+    public function setTreeTypeMinBranchingNum(int $tree_type_min_branching_num): void
     {
-        $this->tree_type_nim_branching_num = $tree_type_nim_branching_num;
+        $this->tree_type_min_branching_num = $tree_type_min_branching_num;
     }
 
     /**

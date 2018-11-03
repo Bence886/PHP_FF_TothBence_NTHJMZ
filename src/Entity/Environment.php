@@ -48,7 +48,7 @@ class Environment
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=5, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * x,y,z
      */
     private $environment_wind_direction;
