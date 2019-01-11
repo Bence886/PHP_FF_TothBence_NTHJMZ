@@ -30,7 +30,14 @@ class EnvironmentController extends Controller
      */
     public function environmentListAction(Request $request): Response
     {
+        $environmentService = $this->get('app.environments');
+        $environments = $environmentService->getAllEnvironments();
+        $twigParams = array("environments"=>null);
+        foreach ($environments as $env) {
+            $twigParams["environments"][] = $env;
+        }
 
+        return $this->render('tree/list_environments.html.twig', $twigParams);
     }
 
     /**

@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function registerAction(Request $request) : Response
     {
-        // TODO: DTO ... Service ...
+        $userService=$this->get("app.users");
         $user = new User();
         $uname = $request->request->get("_username");
         $clearpass = $request->request->get("_password");
@@ -52,8 +52,7 @@ class UserController extends Controller
         $user->setUserPass($hashpass);
         $user->setUserRank("USER");
         try {
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+            $userService->saveUser($user);
             $this->addFlash("notice", "USER {$uname} REGISTERED");
         }
         catch (\Exception $ex){
@@ -78,7 +77,14 @@ class UserController extends Controller
      */
     public function userListAction(Request $request): Response
     {
+        $userService = $this->get('app.users');
+        $users = $userService->getAllUsers();
+        $twigParams = array("users"=>null);
+        foreach ($users as $user) {
+            $twigParams["users"][] = $user;
+        }
 
+        return $this->render('tree/list_users.html.twig', $twigParams);
     }
 
     /**

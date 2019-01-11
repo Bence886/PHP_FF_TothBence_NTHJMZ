@@ -30,7 +30,14 @@ class TypeController extends Controller
      */
     public function typeListAction(Request $request): Response
     {
+        $typeService = $this->get('app.treetypes');
+        $types = $typeService->getAllTreeTypes();
+        $twigParams = array("types"=>null);
+        foreach ($types as $type) {
+            $twigParams["types"][] = $type;
+        }
 
+        return $this->render('tree/list_types.html.twig', $twigParams);
     }
 
     /**

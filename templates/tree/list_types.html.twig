@@ -1,0 +1,66 @@
+{# templates/tree/list_types.html.twig #}
+{# @var types \App\Entity\TreeType[] #}
+{% extends 'tree/index.html.twig' %}
+{% block treeContent %}
+    <div class="container">
+        <div class="card justify-content-center">
+            <h5 class="card-header bg-dark text-white">
+                Tree Type list
+                <a href="{{ path('typeEdit') }}" class="btn btn-success float-right">New</a>
+            </h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Level</th>
+                            <th>Branching type</th>
+                            <th>Branch num min</th>
+                            <th>Branch num max</th>
+                            <th>Branch length</th>
+                            <th>Branch width</th>
+                            <th>Branch roll</th>
+                            <th>Branch angle</th>
+                            <th>File name</th>
+                            <th>Edit</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th>Delete</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for type in types %}
+                            <tr>
+                                <td>{{ type.treeTypeId }}</td>
+                                <td>{{ type.treeTypeName }}</td>
+                                <td>{{ type.treeTypeAge }}</td>
+                                <td>{{ type.treeTypeLevel }}</td>
+                                <td>{{ type.treeTypeBranchingType }}</td>
+                                <td>{{ type.treeTypeMinBranchingNum }}</td>
+                                <td>{{ type.treeTypeMaxBranchingNum }}</td>
+                                <td>{{ type.treeTypeGrowthLen }}</td>
+                                <td>{{ type.treeTypeGrowthWidth }}</td>
+                                <td>{{ type.treeTypeBranchingRoll }}</td>
+                                <td>{{ type.treeTypeBranchingAngle }}</td>
+                                <td>{{ type.treeTypeName }}</td>
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('typeEdit', { 'typeId': type.treeTypeId }) }}">EDIT</a>
+                                </td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td>
+                                        <a class="btn btn-danger"
+                                           href="{{ path('typeDelete', {'typeId': type.treeTypeId }) }}">Delete</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
