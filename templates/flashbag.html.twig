@@ -2,7 +2,12 @@
 {# display flashbag #}
 {% set notices = app.session.flashbag.get('notice') %}
 {% for msg in notices %}
-    <p style="color:red;font-weight:bold;">{{ msg }}</p>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" align="center">
+        {{ msg }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 {% endfor %}
 {% if notices is not empty %}
     <hr />

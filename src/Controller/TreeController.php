@@ -50,7 +50,7 @@ class TreeController extends Controller
         $hashpass = $this->get("security.password_encoder")->encodePassword($user, $clearpass);
         $user->setUserEmail($uname);
         $user->setUserPass($hashpass);
-        $user->setUserRank("ADMIN");
+        $user->setUserRank("USER");
         try {
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
@@ -89,4 +89,23 @@ class TreeController extends Controller
 
         return new Response("Secure content, Wololo!");
     }
+
+    /**
+     * @Route(path="/list", name="treeList")
+     * @param Request $request
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function treeListAction(Request $request): Response
+    {
+        $treeService = $this->get('app.trees');
+        $trees = $treeService->getAllTrees();
+        $twigParams = array("trees"=>null);
+        foreach ($trees as $tree) {
+            $twigParams["trees"][] = $tree;
+        }
+
+        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+
 }

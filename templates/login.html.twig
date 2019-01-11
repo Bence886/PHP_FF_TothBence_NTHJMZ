@@ -1,48 +1,47 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    {% include 'flashbag.html.twig' %}
+{% extends 'tree/index.html.twig' %}
+{% block treeContent %}
     {% if error %}
-        <p style="color:orange;font-weight:bold;">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ error.messageKey }}
-        </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {% endif %}
-
-    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-        <p style="color:green;font-size:22px">
-            HI {{ app.user.username }}!
-        </p>
-        <p><a href="{{ path('logout') }}">LOG OUT</a></p>
-    {% endif %}
-    {#
-    {% for value in app.user.roles %}
-        <li>{{ value }}</li>
-    {% endfor %}
-    #}
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <p>You are an admin, sir...</p>
-    {% elseif is_granted("ROLE_USER")  %}
-        <p>You are a user...</p>
-    {% else %}
-        <p>You are NOT logged in...</p>
-    {% endif %}
-
-    <h1>LOGIN</h1>
-    <form action="{{ path('login') }}" method="post">
-        <!-- CSRF = Cross Site Request Forgery -->
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}" />
-        Username: <input type="email" name="_username"
-                         value="{{ last_username }}" /><br/>
-        Password: <input type="password" name="_password" /><br/>
-        <input type="submit" value="LOGIN" />
-    </form>
-    <h1>REGISTER</h1>
-    <form action="{{ path('register') }}" method="post">
-        Username: <input type="email" name="_username"
-                         value="{{ last_username }}" /><br/>
-        Password: <input type="password" name="_password" /><br/>
-        <input type="submit" value="REGISTER" />
-    </form>
+    <div align="center">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-center justify-content-center" style="width: 25rem;">
+                    <h5 class="card-header bg-dark text-white">Login</h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form action="{{ path('login') }}" method="post">
+                                <!-- CSRF = Cross Site Request Forgery -->
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                                Username: <input class="form-control" type="email" name="_username"
+                                                 value="{{ last_username }}"/><br/>
+                                Password: <input class="form-control" type="password" name="_password"/><br/>
+                                <input class="btn btn-primary" type="submit" value="LOGIN"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center justify-content-center" style="width: 25rem;">
+                    <h5 class="card-header bg-dark text-white">Register</h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form action="{{ path('register') }}" method="post">
+                                Username: <input class="form-control" type="email" name="_username"
+                                                 value="{{ last_username }}"/><br/>
+                                Password: <input class="form-control" type="password" name="_password"/><br/>
+                                <input class="btn btn-primary" type="submit" value="REGISTER"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
