@@ -14,8 +14,7 @@
                 {{ form_end(form) }}
 
                 <hr/>
-
-                {% if tree.treeSketchfabLink is not null %}
+                {% if tree.treeSketchfabLink is not null and remote_file_exists(tree.treeSketchfabLink) %}
                     <div class="sketchfab-embed-wrapper" align="center">
                         <iframe width="640" height="480" src="{{ tree.treeSketchfabLink }}/embed?camera=0"
                                 frameborder="0"></iframe>

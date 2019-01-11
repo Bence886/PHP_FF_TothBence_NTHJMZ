@@ -92,7 +92,7 @@ class UserController extends Controller
      * @param Request $request
      * @param int $userId
      * @return Response
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function userEditAction(Request $request, $userId=0): Response
     {
