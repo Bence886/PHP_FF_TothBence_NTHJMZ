@@ -44,4 +44,8 @@ services:
         class: App\Service\IEnvironmentCrudService
         public: true
         factory: [ "@app.crudfactory", getEnvironmentService ]
+    app.users:
+        class: App\Service\IUserCrudService
+        public: true
+        factory: [ "@app.crudfactory", getUserService ]
 # \xampp\php\php bin/console debug:container app

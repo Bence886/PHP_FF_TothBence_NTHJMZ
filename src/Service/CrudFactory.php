@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 use Doctrine\ORM\EntityManager;
@@ -36,18 +37,23 @@ class CrudFactory
         $this->request = $request->getCurrentRequest();
     }
 
-    public function getTreeService() : ITreeCrudService
+    public function getTreeService(): ITreeCrudService
     {
         return new TreeCrudService($this->em, $this->formFactory, $this->request);
     }
 
-    public function getTreeTypeService() : ITreeTypeCrudService
+    public function getTreeTypeService(): ITreeTypeCrudService
     {
         return new TreeTypeCrudService($this->em, $this->formFactory, $this->request);
     }
 
-    public function getEnvironmentService() : IEnvironmentCrudService
+    public function getEnvironmentService(): IEnvironmentCrudService
     {
         return new EnvironmentCrudService($this->em, $this->formFactory, $this->request);
+    }
+
+    public function getUserService(): IUserCrudService
+    {
+        return new UserCrudService($this->em, $this->formFactory, $this->request);
     }
 }
