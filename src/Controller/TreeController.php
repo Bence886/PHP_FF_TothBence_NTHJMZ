@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Tree;
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,7 +51,21 @@ class TreeController extends Controller
      */
     public function treeEditAction(Request $request, $treeId=0): Response
     {
-
+        $treeService = $this->get('app.trees');
+        if ($treeId){
+            $oneTree = $treeService->getTreeById($treeId);
+        } else {
+            $oneTree = new Tree();
+        }
+        $form = $treeService->getForm($oneTree);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $treeService->saveTree($oneTree);
+            $this->addFlash('notice', 'Tree edited');
+            return $this->redirectToRoute('treeList');
+        }
+        return $this->render('tree/edit_tree.html.twig',
+            ["form"=>$form->createView()]);
     }
 
     /**
@@ -62,6 +77,8 @@ class TreeController extends Controller
      */
     public function treeDeleteAction(Request $request, $treeId=0): Response
     {
-
+        $treeService = $this->get('app.trees');
+        $treeService->removeTree($treeId);
+        return $this->redirectToRoute('treeList');
     }
 }

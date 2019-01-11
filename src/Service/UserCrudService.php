@@ -11,12 +11,12 @@ namespace App\Service;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeImmutableToDateTimeTransformer;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -91,7 +91,7 @@ class UserCrudService extends CrudService implements IUserCrudService
         $form = $this->formFactory->createBuilder(FormType::class, $oneUser);
 
         $form->add("user_name", TextType::class, ["required"=>true]);
-        $form->add("user_registered", \DateTime::class, ["required"=>true]);
+        $form->add("user_registered", DateTimeType::class, ["required"=>true]);
         $form->add("user_rank", TextType::class, ["required"=>true]);
 
         $form->add("SAVE", SubmitType::class);

@@ -3,7 +3,7 @@ namespace App\Service;
 
 
 use App\Entity\Environment;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormInterface;
 
 interface IEnvironmentCrudService
 {
@@ -36,7 +36,7 @@ interface IEnvironmentCrudService
 
     /**
      * @param $oneEnvironment Environment
-     * @return FormFactory
+     * @return FormInterface
      */
     public function getEnvironmentForm($oneEnvironment);
 }

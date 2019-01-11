@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\TreeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,21 @@ class TypeController extends Controller
      */
     public function typeEditAction(Request $request, $typeId=0): Response
     {
-
+        $typeService = $this->get('app.treetypes');
+        if ($typeId){
+            $oneType = $typeService->getTreeTypeById($typeId);
+        } else {
+            $oneType = new TreeType();
+        }
+        $form = $typeService->getForm($oneType);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $typeService->saveTreeType($oneType);
+            $this->addFlash('notice', 'Type edited');
+            return $this->redirectToRoute('typeList');
+        }
+        return $this->render('tree/edit_type.html.twig',
+            ["form"=>$form->createView()]);
     }
 
     /**
@@ -61,6 +76,8 @@ class TypeController extends Controller
      */
     public function typeDeleteAction(Request $request, $typeId=0): Response
     {
-
+        $typeService = $this->get('app.treetypes');
+        $typeService->removeTreeType($typeId);
+        return $this->redirectToRoute('typeList');
     }
 }

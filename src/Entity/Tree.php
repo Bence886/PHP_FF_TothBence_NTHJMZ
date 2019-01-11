@@ -58,7 +58,7 @@ class Tree
     private $tree_file_name;
 
     /**
-     * @var string;
+     * @var string ?
      * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $tree_sketchfab_link;
@@ -173,9 +173,9 @@ class Tree
     }
 
     /**
-     * @return string
+     * @return string ?
      */
-    public function getTreeSketchfabLink(): string
+    public function getTreeSketchfabLink(): ?string
     {
         return $this->tree_sketchfab_link;
     }

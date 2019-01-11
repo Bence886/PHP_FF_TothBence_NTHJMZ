@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Environment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,21 @@ class EnvironmentController extends Controller
      */
     public function environmentEditAction(Request $request, $environmentId=0): Response
     {
-
+        $envService = $this->get('app.environments');
+        if ($environmentId){
+            $oneEnv = $envService->getEnvironmentById($environmentId);
+        } else {
+            $oneEnv = new Environment();
+        }
+        $form = $envService->getEnvironmentForm($oneEnv);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $envService->saveEnvironment($oneEnv);
+            $this->addFlash('notice', 'Environment edited');
+            return $this->redirectToRoute('environmentList');
+        }
+        return $this->render('tree/edit_environment.html.twig',
+            ["form"=>$form->createView()]);
     }
 
     /**
@@ -61,6 +76,8 @@ class EnvironmentController extends Controller
      */
     public function environmentDeleteAction(Request $request, $environmentId=0): Response
     {
-
+        $envService = $this->get('app.environments');
+        $envService->removeEnvironment($environmentId);
+        return $this->redirectToRoute('environmentList');
     }
 }

@@ -1,0 +1,18 @@
+{# templates/tree/edit_type.html.twig #}
+{% extends 'tree/index.html.twig' %}
+{% block treeContent %}
+    <div class="container">
+        <div class="card justify-content-center">
+            <h5 class="card-header bg-dark text-white">
+                Edit
+                <a href="{{ path('typeList') }}" class="btn btn-success float-right">Tree Types list</a>
+            </h5>
+            <div class="card-body">
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

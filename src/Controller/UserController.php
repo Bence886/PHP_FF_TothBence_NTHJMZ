@@ -96,7 +96,21 @@ class UserController extends Controller
      */
     public function userEditAction(Request $request, $userId=0): Response
     {
-
+        $userService = $this->get('app.users');
+        if ($userId){
+            $oneUser = $userService->getUserById($userId);
+        } else {
+            $oneUser = new User();
+        }
+        $form = $userService->getForm($oneUser);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $userService->saveUser($oneUser);
+            $this->addFlash('notice', 'user edited');
+            return $this->redirectToRoute('userList');
+        }
+        return $this->render('tree/edit_user.html.twig',
+            ["form"=>$form->createView()]);
     }
 
     /**
@@ -108,6 +122,8 @@ class UserController extends Controller
      */
     public function userDeleteAction(Request $request, $userId=0): Response
     {
-
+        $userService = $this->get('app.users');
+        $userService->removeUser($userId);
+        return $this->redirectToRoute('userList');
     }
 }
