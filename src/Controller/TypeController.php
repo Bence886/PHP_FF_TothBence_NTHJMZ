@@ -30,13 +30,30 @@ class TypeController extends Controller
      */
     public function typeListAction(Request $request): Response
     {
-        $treeService = $this->get('app.trees');
-        $trees = $treeService->getAllTrees();
-        $twigParams = array("trees"=>null);
-        foreach ($trees as $tree) {
-            $twigParams["trees"][] = $tree;
-        }
 
-        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+
+    /**
+     * @Route(path="/type_edit/{typeId}", name="typeEdit")
+     * @param Request $request
+     * @param int $typeId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function typeEditAction(Request $request, $typeId=0): Response
+    {
+
+    }
+
+    /**
+     * @Route(path="/type_delete/{typeId}", name="typeDelete")
+     * @param Request $request
+     * @param int $typeId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function typeDeleteAction(Request $request, $typeId=0): Response
+    {
+
     }
 }

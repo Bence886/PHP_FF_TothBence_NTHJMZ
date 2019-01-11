@@ -40,4 +40,28 @@ class TreeController extends Controller
 
         return $this->render('tree/list_trees.html.twig', $twigParams);
     }
+
+    /**
+     * @Route(path="/tree_edit/{treeId}", name="treeEdit")
+     * @param Request $request
+     * @param int $treeId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function treeEditAction(Request $request, $treeId=0): Response
+    {
+
+    }
+
+    /**
+     * @Route(path="/tree_delete/{treeId}", name="treeDelete")
+     * @param Request $request
+     * @param int $treeId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function treeDeleteAction(Request $request, $treeId=0): Response
+    {
+
+    }
 }

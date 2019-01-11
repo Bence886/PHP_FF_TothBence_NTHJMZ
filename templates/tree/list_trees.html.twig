@@ -4,7 +4,10 @@
 {% block treeContent %}
     <div class="container">
         <div class="card justify-content-center">
-            <h5 class="card-header bg-dark text-white">Tree list</h5>
+            <h5 class="card-header bg-dark text-white">
+                Tree list
+                <a href="{{ path('treeEdit') }}" class="btn btn-success float-right">New</a>
+            </h5>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover ">
@@ -33,11 +36,11 @@
                                 <td>{{ tree.treeFileName }}</td>
                                 <td>
                                     <a class="nav-link"
-                                       href="{{ path('typeDetails', {'typeId': tree.treeTreeType.treeTypeId}) }}">{{ tree.treeTreeType }}</a>
+                                       href="{{ path('typeEdit', {'typeId': tree.treeTreeType.treeTypeId}) }}">{{ tree.treeTreeType }}</a>
                                 </td>
                                 <td>
                                     <a class="nav-link"
-                                       href="{{ path('environmentDetails', {'environmentId': tree.treeEnvironment.environmentId}) }}">{{ tree.treeEnvironment }}</a>
+                                       href="{{ path('environmentEdit', {'environmentId': tree.treeEnvironment.environmentId}) }}">{{ tree.treeEnvironment }}</a>
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="{{ path('treeEdit', { 'treeId': tree.treeId }) }}">EDIT</a>

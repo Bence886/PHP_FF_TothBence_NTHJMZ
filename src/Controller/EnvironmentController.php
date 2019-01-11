@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TreeController
+ * Class EnvironmentController
  * @package App\Controller
  * @Route(path="environment")
  */
@@ -30,13 +30,30 @@ class EnvironmentController extends Controller
      */
     public function environmentListAction(Request $request): Response
     {
-        $treeService = $this->get('app.trees');
-        $trees = $treeService->getAllTrees();
-        $twigParams = array("trees"=>null);
-        foreach ($trees as $tree) {
-            $twigParams["trees"][] = $tree;
-        }
 
-        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+
+    /**
+     * @Route(path="/environment_edit/{environmentId}", name="environmentEdit")
+     * @param Request $request
+     * @param int $environmentId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function environmentEditAction(Request $request, $environmentId=0): Response
+    {
+
+    }
+
+    /**
+     * @Route(path="/environment_delete/{environmentId}", name="environmentDelete")
+     * @param Request $request
+     * @param int $environmentId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function environmentDeleteAction(Request $request, $environmentId=0): Response
+    {
+
     }
 }

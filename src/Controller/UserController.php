@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TreeController
+ * Class UserController
  * @package App\Controller
  * @Route(path="user")
  */
@@ -78,13 +78,30 @@ class UserController extends Controller
      */
     public function userListAction(Request $request): Response
     {
-        $treeService = $this->get('app.trees');
-        $trees = $treeService->getAllTrees();
-        $twigParams = array("trees"=>null);
-        foreach ($trees as $tree) {
-            $twigParams["trees"][] = $tree;
-        }
 
-        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+
+    /**
+     * @Route(path="/user_edit/{userId}", name="userEdit")
+     * @param Request $request
+     * @param int $userId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function userEditAction(Request $request, $userId=0): Response
+    {
+
+    }
+
+    /**
+     * @Route(path="/user_delete/{userId}", name="userDelete")
+     * @param Request $request
+     * @param int $userId
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function userDeleteAction(Request $request, $userId=0): Response
+    {
+
     }
 }
