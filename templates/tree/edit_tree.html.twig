@@ -12,6 +12,15 @@
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
+
+                <hr/>
+
+                {% if tree.treeSketchfabLink is not null %}
+                    <div class="sketchfab-embed-wrapper" align="center">
+                        <iframe width="640" height="480" src="{{ tree.treeSketchfabLink }}/embed?camera=0"
+                                frameborder="0"></iframe>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -106,7 +106,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeId(): int
+    public function getTreeTypeId(): ?int
     {
         return $this->tree_type_id;
     }
@@ -114,7 +114,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeAge(): int
+    public function getTreeTypeAge(): ?int
     {
         return $this->tree_type_age;
     }
@@ -130,7 +130,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeLevel(): int
+    public function getTreeTypeLevel(): ?int
     {
         return $this->tree_type_level;
     }
@@ -146,7 +146,7 @@ class TreeType
     /**
      * @return string
      */
-    public function getTreeTypeName(): string
+    public function getTreeTypeName(): ?string
     {
         return $this->tree_type_name;
     }
@@ -162,7 +162,7 @@ class TreeType
     /**
      * @return string
      */
-    public function getTreeTypeBranchingType(): string
+    public function getTreeTypeBranchingType(): ?string
     {
         return $this->tree_type_branching_type;
     }
@@ -178,7 +178,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeMinBranchingNum(): int
+    public function getTreeTypeMinBranchingNum(): ?int
     {
         return $this->tree_type_min_branching_num;
     }
@@ -194,7 +194,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeMaxBranchingNum(): int
+    public function getTreeTypeMaxBranchingNum(): ?int
     {
         return $this->tree_type_max_branching_num;
     }
@@ -210,7 +210,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeGrowthLen(): int
+    public function getTreeTypeGrowthLen(): ?int
     {
         return $this->tree_type_growth_len;
     }
@@ -226,7 +226,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeGrowthWidth(): int
+    public function getTreeTypeGrowthWidth(): ?int
     {
         return $this->tree_type_growth_width;
     }
@@ -242,7 +242,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeBranchingRoll(): int
+    public function getTreeTypeBranchingRoll(): ?int
     {
         return $this->tree_type_branching_roll;
     }
@@ -258,7 +258,7 @@ class TreeType
     /**
      * @return int
      */
-    public function getTreeTypeBranchingAngle(): int
+    public function getTreeTypeBranchingAngle(): ?int
     {
         return $this->tree_type_branching_angle;
     }
@@ -274,7 +274,7 @@ class TreeType
     /**
      * @return string
      */
-    public function getTreeTypeFileName(): string
+    public function getTreeTypeFileName(): ?string
     {
         return $this->tree_type_file_name;
     }

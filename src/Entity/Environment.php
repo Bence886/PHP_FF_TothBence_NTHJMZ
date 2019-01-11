@@ -90,7 +90,7 @@ class Environment
     /**
      * @return int
      */
-    public function getEnvironmentId(): int
+    public function getEnvironmentId(): ?int
     {
         return $this->environment_id;
     }
@@ -98,7 +98,7 @@ class Environment
     /**
      * @return string
      */
-    public function getEnvironmentName(): string
+    public function getEnvironmentName(): ?string
     {
         return $this->environment_name;
     }
@@ -114,7 +114,7 @@ class Environment
     /**
      * @return int
      */
-    public function getEnvironmentSoilQuality(): int
+    public function getEnvironmentSoilQuality(): ?int
     {
         return $this->environment_soil_quality;
     }
@@ -130,7 +130,7 @@ class Environment
     /**
      * @return int
      */
-    public function getEnvironmentAltitude(): int
+    public function getEnvironmentAltitude(): ?int
     {
         return $this->environment_altitude;
     }
@@ -146,7 +146,7 @@ class Environment
     /**
      * @return string
      */
-    public function getEnvironmentWindDirection(): string
+    public function getEnvironmentWindDirection(): ?string
     {
         return $this->environment_wind_direction;
     }
@@ -162,7 +162,7 @@ class Environment
     /**
      * @return int
      */
-    public function getEnvironmentWindStrength(): int
+    public function getEnvironmentWindStrength(): ?int
     {
         return $this->environment_wind_strength;
     }
@@ -178,7 +178,7 @@ class Environment
     /**
      * @return int
      */
-    public function getEnvironmentRainfall(): int
+    public function getEnvironmentRainfall(): ?int
     {
         return $this->environment_rainfall;
     }
@@ -194,7 +194,7 @@ class Environment
     /**
      * @return string
      */
-    public function getEnvironmentFileName(): string
+    public function getEnvironmentFileName(): ?string
     {
         return $this->environment_file_name;
     }

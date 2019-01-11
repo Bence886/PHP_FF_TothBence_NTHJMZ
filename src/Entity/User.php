@@ -124,7 +124,7 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->user_id;
     }
@@ -132,7 +132,7 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @return string
      */
-    public function getUserEmail(): string
+    public function getUserEmail(): ?string
     {
         return $this->user_email;
     }
@@ -148,7 +148,7 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @return string
      */
-    public function getUserPass(): string
+    public function getUserPass(): ?string
     {
         return $this->user_pass;
     }
@@ -164,7 +164,7 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @return \DateTime
      */
-    public function getUserRegistered(): \DateTime
+    public function getUserRegistered(): ?\DateTime
     {
         return $this->user_registered;
     }
@@ -180,7 +180,7 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @return string
      */
-    public function getUserRank(): string
+    public function getUserRank(): ?string
     {
         return $this->user_rank;
     }

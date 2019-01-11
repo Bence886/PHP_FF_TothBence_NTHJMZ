@@ -65,7 +65,7 @@ class TreeController extends Controller
             return $this->redirectToRoute('treeList');
         }
         return $this->render('tree/edit_tree.html.twig',
-            ["form"=>$form->createView()]);
+            ["form"=>$form->createView(), "tree"=>$oneTree]);
     }
 
     /**

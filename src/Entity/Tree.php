@@ -79,7 +79,7 @@ class Tree
     /**
      * @return Environment
      */
-    public function getTreeEnvironment(): Environment
+    public function getTreeEnvironment(): ?Environment
     {
         return $this->tree_environment;
     }
@@ -95,7 +95,7 @@ class Tree
     /**
      * @return TreeType
      */
-    public function getTreeTreeType(): TreeType
+    public function getTreeTreeType(): ?TreeType
     {
         return $this->tree_tree_type;
     }
@@ -111,7 +111,7 @@ class Tree
     /**
      * @return string
      */
-    public function getTreeName(): string
+    public function getTreeName(): ?string
     {
         return $this->tree_name;
     }
@@ -127,7 +127,7 @@ class Tree
     /**
      * @return int
      */
-    public function getTreeAge(): int
+    public function getTreeAge(): ?int
     {
         return $this->tree_age;
     }
@@ -143,7 +143,7 @@ class Tree
     /**
      * @return int
      */
-    public function getTreeResolution(): int
+    public function getTreeResolution(): ?int
     {
         return $this->tree_resolution;
     }
@@ -159,7 +159,7 @@ class Tree
     /**
      * @return string
      */
-    public function getTreeFileName(): string
+    public function getTreeFileName(): ?string
     {
         return $this->tree_file_name;
     }
