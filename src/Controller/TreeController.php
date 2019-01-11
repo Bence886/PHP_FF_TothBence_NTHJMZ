@@ -91,10 +91,10 @@ class TreeController extends Controller
     }
 
     /**
-     * @Route(path="/list", name="treeList")
+     * @Route(path="/tree_list", name="treeList")
      * @param Request $request
      * @return Response
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      */
     public function treeListAction(Request $request): Response
     {
@@ -108,4 +108,56 @@ class TreeController extends Controller
         return $this->render('tree/list_trees.html.twig', $twigParams);
     }
 
+    /**
+     * @Route(path="/user_list", name="userList")
+     * @param Request $request
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function userListAction(Request $request): Response
+    {
+        $treeService = $this->get('app.trees');
+        $trees = $treeService->getAllTrees();
+        $twigParams = array("trees"=>null);
+        foreach ($trees as $tree) {
+            $twigParams["trees"][] = $tree;
+        }
+
+        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+
+    /**
+     * @Route(path="/environment_list", name="environmentList")
+     * @param Request $request
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function environmentListAction(Request $request): Response
+    {
+        $treeService = $this->get('app.trees');
+        $trees = $treeService->getAllTrees();
+        $twigParams = array("trees"=>null);
+        foreach ($trees as $tree) {
+            $twigParams["trees"][] = $tree;
+        }
+
+        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
+    /**
+     * @Route(path="/type_list", name="typeList")
+     * @param Request $request
+     * @return Response
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     */
+    public function typeListAction(Request $request): Response
+    {
+        $treeService = $this->get('app.trees');
+        $trees = $treeService->getAllTrees();
+        $twigParams = array("trees"=>null);
+        foreach ($trees as $tree) {
+            $twigParams["trees"][] = $tree;
+        }
+
+        return $this->render('tree/list_trees.html.twig', $twigParams);
+    }
 }
