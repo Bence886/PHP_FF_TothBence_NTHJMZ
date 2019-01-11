@@ -1,4 +1,5 @@
 {# templates/tree/list_trees.html.twig #}
+{# @var trees \App\Entity\Tree[] #}
 {% extends 'tree/index.html.twig' %}
 {% block treeContent %}
     <div class="container">
@@ -11,21 +12,42 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Height</th>
-                            <th>Home</th>
-                            <th>Price</th>
                             <th>Age</th>
+                            <th>Resolution</th>
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Environment</th>
+                            <th>Edit</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th>Delete</th>
+                            {% endif %}
                         </tr>
                         </thead>
                         <tbody>
                         {% for tree in trees %}
                             <tr>
-                                <td>{{ tree.id }}</td>
-                                <td>{{ tree.name }}</td>
-                                <td>{{ tree.height }}</td>
-                                <td>{{ tree.home }}</td>
-                                <td>{{ tree.price }}</td>
-                                <td>{{ tree.age }}</td>
+                                <td>{{ tree.treeId }}</td>
+                                <td>{{ tree.treeName }}</td>
+                                <td>{{ tree.treeAge }}</td>
+                                <td>{{ tree.treeResolution }}</td>
+                                <td>{{ tree.treeFileName }}</td>
+                                <td>
+                                    <a class="nav-link"
+                                       href="{{ path('typeDetails', {'typeId': tree.treeTreeType.treeTypeId}) }}">{{ tree.treeTreeType }}</a>
+                                </td>
+                                <td>
+                                    <a class="nav-link"
+                                       href="{{ path('environmentDetails', {'environmentId': tree.treeEnvironment.environmentId}) }}">{{ tree.treeEnvironment }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('treeEdit', { 'treeId': tree.treeId }) }}">EDIT</a>
+                                </td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td>
+                                        <a class="btn btn-danger"
+                                           href="{{ path('treeDelete', {'treeId': tree.treeId}) }}">Delete</a>
+                                    </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

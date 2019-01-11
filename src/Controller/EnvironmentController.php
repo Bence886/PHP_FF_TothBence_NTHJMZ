@@ -3,13 +3,12 @@
  * Created by PhpStorm.
  * User: tbenc
  * Date: 2019. 01. 11.
- * Time: 8:39
+ * Time: 10:40
  */
 
 namespace App\Controller;
 
 
-use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,17 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TreeController
  * @package App\Controller
- * @Route(path="tree")
+ * @Route(path="environment")
  */
-class TreeController extends Controller
+class EnvironmentController extends Controller
 {
     /**
-     * @Route(path="/tree_list", name="treeList")
+     * @Route(path="/environment_list", name="environmentList")
      * @param Request $request
      * @return Response
      * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      */
-    public function treeListAction(Request $request): Response
+    public function environmentListAction(Request $request): Response
     {
         $treeService = $this->get('app.trees');
         $trees = $treeService->getAllTrees();
