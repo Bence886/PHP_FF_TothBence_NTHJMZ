@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'flashbag.html.twig' %}
+    {% if error %}
+        <p style="color:orange;font-weight:bold;">
+            {{ error.messageKey }}
+        </p>
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <p style="color:green;font-size:22px">
+            HI {{ app.user.username }}!
+        </p>
+        <p><a href="{{ path('logout') }}">LOG OUT</a></p>
+    {% endif %}
+    {#
+    {% for value in app.user.roles %}
+        <li>{{ value }}</li>
+    {% endfor %}
+    #}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>You are an admin, sir...</p>
+    {% elseif is_granted("ROLE_USER")  %}
+        <p>You are a user...</p>
+    {% else %}
+        <p>You are NOT logged in...</p>
+    {% endif %}
+
+    <h1>LOGIN</h1>
+    <form action="{{ path('login') }}" method="post">
+        <!-- CSRF = Cross Site Request Forgery -->
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}" />
+        Username: <input type="email" name="_username"
+                         value="{{ last_username }}" /><br/>
+        Password: <input type="password" name="_password" /><br/>
+        <input type="submit" value="LOGIN" />
+    </form>
+    <h1>REGISTER</h1>
+    <form action="{{ path('register') }}" method="post">
+        Username: <input type="email" name="_username"
+                         value="{{ last_username }}" /><br/>
+        Password: <input type="password" name="_password" /><br/>
+        <input type="submit" value="REGISTER" />
+    </form>
+{% endblock %}
