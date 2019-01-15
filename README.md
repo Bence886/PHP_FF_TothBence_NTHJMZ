@@ -12,36 +12,31 @@ The route of the site is *tree/*
 The routes of the classes are the name of the tables.
 
 List of actions (*CRUD*):  
- Create:
- 
-| Tables        | Path                | Name                    |
-| ------------- | ------------------- | ----------------------- |
-| tree          | /tree/Create        | treeActionCreate        |
-| type          | /type/Create        | typeActionCreate        |
-| environment   | /environment/Create | environmentActionCreate |
 
 Read:
 
 | Tables        | Path              | Name                  |
 | ------------- | ----------------- | --------------------- |
-| tree          | /tree/Read        | treeActionRead        |
-| type          | /type/Read        | typeActionRead        |
-| environment   | /environment/Read | environmentActionRead |
+| tree          | /tree/tree_list        | treeRead        |
+| type          | /type/type_list        | typeRead        |
+| environment   | /environment/environment_list | environmentnRead |
 
 Update:
 
+Create:
+
 | Tables        | Path                 | Name                    |
 | ------------- | -------------------- | ----------------------- |
-| tree          | /tree/Update         | treeActionUpdate        |
-| type          | /type/Update         | typeActionUpdate        |
-| environment   | /environment/Update  | environmentActionUpdate |
+| tree          | /tree/tree_edit         | treeUpdate        |
+| type          | /type/type_edit         | typeUpdate        |
+| environment   | /environment/environment_edit  | environmentUpdate |
 
 Delete:
 
 | Tables        | Path                 | Name                    |
 | ------------- | -------------------- | ----------------------- |
-| tree          | /tree/Delete         | treeActionDelete        |
-| type          | /type/Delete         | typeActionDelete        |
-| environment   | /environment/Delete  | environmentActionDelete |
+| tree          | /tree/tree_delete         | treeDelete        |
+| type          | /type/type_delete         | typenDelete        |
+| environment   | /environment/environment_delete  | environmentDelete |
 
 > https://sketchfab.com
