@@ -16,9 +16,9 @@ Read:
 
 | Tables        | Path              | Name                  |
 | ------------- | ----------------- | --------------------- |
-| tree          | /tree/tree_list        | treeRead        |
-| type          | /type/type_list        | typeRead        |
-| environment   | /environment/environment_list | environmentnRead |
+| tree          | /tree/tree_list        | treeEdit        |
+| type          | /type/type_list        | typeEdit        |
+| environment   | /environment/environment_list | environmentEdit |
 
 Update:
 
